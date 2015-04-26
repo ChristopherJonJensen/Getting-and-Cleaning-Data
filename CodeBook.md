@@ -42,6 +42,6 @@ A table containing 180 observations (i.e., 30 Subjects X 6 Tasks), whose values 
 * "tBodyAcc.mean...X" ... "fBodyBodyGyroJerkMag.meanFreq.."
   * As per the assignment guidelines, each variable was selected because its name contained either *std* or *mean*.
   * The 79 other variables represent the *calculated averages* of specific first- and second-order measures taken by the cellphone accelerometers.
-  * These averages were calculated after employing the **group_by** function on the dataset, allowing for each average to to computed across all observations of a specific Subject performing a specific Task. See the project **ReadMe** for more information.
+  * These averages were calculated after employing the **group_by** function on the dataset, allowing for each average to be computed across all observations of a specific Subject performing a specific Task. See the project **ReadMe** for more information.
   * Thus, there are 180 observations total: 30 Subjects X 6 Activities.
   * All are numeric
