@@ -34,22 +34,14 @@ A table containing 180 observations (i.e., 30 Subjects X 6 Tasks), whose values 
   * 7352 observations of 1 variable. 0 NA values.
   * (contents are as described above, in my overview of "y_subj.txt.")
 
-
-####Data Cleaning Process (Specific Steps): 
-1. In reading in **features.txt** and **activity_labels.txt**, I used the strip.white=TRUE argument to trim whitespace from both variables. This was necessary, because I was planning to use these values as column headers and a factor variable (respectively).
-2. The names stored in "features.txt" were then used to assign column names to X_test and X_train.
-  1. Due to some awkwardness in R's naming conventions, it was necessary to use the **make.names()** function on these column names prior to assigning them.
-  2. Given that these column names are already descriptive (e.g., "fBodyAcc.meanFreq...Y"), and that they are defined in detail in the data's documentation, I felt it would be unnecessary (and possibly counterproductive) to try and modify them.
-3. Since we were only looking for information pertaining to standard deviation and mean, I used **grep** to find all of the column names that included either *std* or *mean*. I then used the result of this search to subset the train_X and test_X data tables, reducing the overall number of columns to 79.
-  1. *Note*: Given that we were not informed about the ultimate use to which our tidy datasets would be put, I decided to err on the side of caution in this step by being as inclusive as possible with regards to those columns that would be preserved.
-4. Subject, Activity, and Observations tables were merged (for both the training and test sets). Then, the training and test sets were merged.
-5. Since the first two columns lacked descriptive names, I labelled them "Subject" and "Task."
-6. In order to make the data more readable, the numeric codes found in the "Task" column were converted into a factor variable (using the text from the **activity_labels.txt** file).
-7. The table was then grouped by Subject and Task, and the average value of each measurement was computed across these groups (reducing the 10299 original observations to a more manageable 180).
-
 #### Variables
-* "Subject" - participant ID (integer)
+* "Subject" - participant ID (integer (1-30))
 * "Task" - task ID (factor variable) (Possible values: LAYING SITTING STANDING WALKING WALKING_DOWNSTAIRS WALKING_UPSTAIRS)
+  * It was necessary to trim the white-space from these values before assigning them.
+  * The integer values in this column were transformed into factors for legibility.
 * "tBodyAcc.mean...X" ... "fBodyBodyGyroJerkMag.meanFreq.."
-  * The 79 other variables represent specific first- and second-order measures taken by the cellphone accelerometers
+  * As per the assignment guidelines, each variable was selected because its name contained either *std* or *mean*.
+  * The 79 other variables represent the *calculated averages* of specific first- and second-order measures taken by the cellphone accelerometers.
+  * These averages were calculated after employing the **group_by** function on the dataset, allowing for each average to to computed across all observations of a specific Subject performing a specific Task. See the project **ReadMe** for more information.
+  * Thus, there are 180 observations total: 30 Subjects X 6 Activities.
   * All are numeric
